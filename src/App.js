@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Home from './pages/Home';
+import Results from './pages/Results';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    const [darkTheme, setDarkTheme] = useState(false);
+
+    return (
+        <div
+            className={
+                darkTheme ? 'dark' : 'flex flex-col   items-center h-screen'
+            }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+            <Switch>
+                <Route exact path="/">
+                    <Home />
+                </Route>
+                <Route exact path={['/search', '/images', '/news', '/videos']}>
+                    <Results />
+                </Route>
+            </Switch>
+            <Footer />
+        </div>
+    );
 }
 
 export default App;
